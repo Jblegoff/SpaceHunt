@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     float m_horizontalSpeed;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,11 +31,9 @@ public class Player : MonoBehaviour
         var topBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).y;
         var bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, dist)).y;
 
-        transform.position = new Vector3(
-            Mathf.Clamp(transform.position.x, leftBorder, rightBorder)
-            , Mathf.Clamp(transform.position.y, topBorder, bottomBorder)
-            , transform.position.z
-        );
+        transform.position = new Vector3( Mathf.Clamp(transform.position.x, leftBorder, rightBorder), 
+                                          Mathf.Clamp(transform.position.y, topBorder, bottomBorder), 
+                                          transform.position.z );
     }
     void PlayerControl()
     {
@@ -55,4 +54,6 @@ public class Player : MonoBehaviour
             transform.position += Vector3.down * m_verticalSpeed * Time.deltaTime;
         }
     }
+
+
 }
