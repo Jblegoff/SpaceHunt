@@ -34,6 +34,7 @@ public class EnemiesManager : MonoBehaviour
             yield return new WaitForSeconds(spawnTime);
             Vector3 spawnLocation = m_camera.ScreenToWorldPoint(new Vector3(Random.Range(0, m_camera.pixelWidth), m_camera.pixelHeight, -m_camera.transform.position.z));
             Instantiate(enemies, spawnLocation, Quaternion.identity);
+            
         }
     }
 }
