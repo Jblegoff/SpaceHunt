@@ -10,7 +10,7 @@ public class Player : Entity
     [SerializeField] float m_verticalSpeed;
     [SerializeField] float m_horizontalSpeed;
     public GameObject Bullet;
-    [SerializeField] float shootFrenquency;
+    [SerializeField] private float shootFrenquency;
     Stopwatch stopwatch=new Stopwatch();
     float height = Screen.height;
     float width = Screen.width;
@@ -24,17 +24,14 @@ public class Player : Entity
     void Start()
     {
         
-        m_verticalSpeed = 8.0f;
-        m_horizontalSpeed = 8.0f;
-
-        
     }
-    void Awake()
+    public override void Awake()
     {
         base.Awake();
         stopwatch.Start();
         m_MainCamera = Camera.main;
         playerScore = 0;
+        
         
     }
     // Update is called once per frame
@@ -78,13 +75,12 @@ public class Player : Entity
             {
                 stopwatch.Reset();
                 stopwatch.Start();
-                Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
+               GameObject Bullet_instance= Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
+                Bullet_instance.GetComponent<Bullet>().OnBulletHit += OnBulletHitPlayer;
             }
             else stopwatch.Start();
-            
-           
+       
         }
-        
         
     }
 
@@ -93,16 +89,16 @@ public class Player : Entity
         if (collision.rigidbody.tag == "Enemy")
         {
             OnHPChange?.Invoke(1);
-            this.loseHP(1);
+            loseHP(1);
             UnityEngine.Debug.Log("Player HP: " + Current_HP);
         }
         if (Current_HP <= 0) Destroy(gameObject);
     }
-
-    private void OnBulletHitPalyer(int score)
+    private void OnBulletHitPlayer(int score)
     {
         playerScore += score;
         OnScoreChange?.Invoke(score);
+        
         UnityEngine.Debug.Log("SCORE: " + playerScore);
     }
     public int GetHP()
