@@ -13,16 +13,16 @@ public class UserInterface : MonoBehaviour
     [SerializeField] private Slider hp_bar;
     [SerializeField] private Player player;
     [SerializeField] private GameObject pausePanel;
-    void Awake()
-    {
+
+    private void Awake()
+   {
         player.OnHPChange    += HandlingHPChange;
         player.OnScoreChange += HandlingScoreChange;
         player.OnHPChange    += HandlingGameOver;
-        playAgain.onClick.AddListener(ResetLevel);
-        
-    }
+
+   }
         // Start is called before the first frame update
-        void Start()
+    void Start()
     {
         hp_bar.maxValue = player.GetMaxHP();
         hp_bar.value = player.GetMaxHP();
@@ -47,6 +47,7 @@ public class UserInterface : MonoBehaviour
         if (player.GetHP() - hp == 0)
         {
             gameOver.SetActive(true);
+            playAgain.gameObject.SetActive(true);
 
         }
     }
@@ -58,10 +59,6 @@ public class UserInterface : MonoBehaviour
         else pausePanel.SetActive(false);
         pause = false;
     }
-    public void ResetLevel()
-    {
-        Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
-    }
+   
 
 }
