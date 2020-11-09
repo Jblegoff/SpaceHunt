@@ -15,13 +15,13 @@ public class UserInterface : MonoBehaviour
     [SerializeField] private GameObject pausePanel;
 
     private void Awake()
-   {
-        player.OnHPChange    += HandlingHPChange;
+    {
+        player.OnHPChange += HandlingHPChange;
         player.OnScoreChange += HandlingScoreChange;
-        player.OnHPChange    += HandlingGameOver;
+        player.OnHPChange += HandlingGameOver;
 
-   }
-        // Start is called before the first frame update
+    }
+    // Start is called before the first frame update
     void Start()
     {
         hp_bar.maxValue = player.GetMaxHP();
@@ -34,13 +34,13 @@ public class UserInterface : MonoBehaviour
     }
     private void HandlingHPChange(int hp)
     {
-        hp_bar.value = player.GetHP()-hp;
-        Debug.Log("Current bar value: " + hp_bar.value + ", Player's HP: " + player.GetHP()+ ", MAX HP: "+player.GetMaxHP()) ;
+        hp_bar.value = player.GetHP() - hp;
+        Debug.Log("Current bar value: " + hp_bar.value + ", Player's HP: " + player.GetHP() + ", MAX HP: " + player.GetMaxHP());
     }
     private void HandlingScoreChange(int score)
     {
         scoreText.text = $"Score: {player.GetScore()}";
-        
+
     }
     private void HandlingGameOver(int hp)
     {
@@ -55,10 +55,10 @@ public class UserInterface : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape)) pause = true;
         if (pause) pausePanel.SetActive(true);
-        
+
         else pausePanel.SetActive(false);
         pause = false;
     }
-   
+
 
 }
