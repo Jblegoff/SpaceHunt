@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UserInterface : MonoBehaviour
+public class UserInterface : MonoBehaviourSingleton<UserInterface>
 {
     [SerializeField] private GameObject gameOver;
     [SerializeField] private Button playAgain;
@@ -16,6 +16,7 @@ public class UserInterface : MonoBehaviour
 
     private void Awake()
    {
+        base.Awake();
         player.OnHPChange    += HandlingHPChange;
         player.OnScoreChange += HandlingScoreChange;
         player.OnHPChange    += HandlingGameOver;
@@ -35,7 +36,7 @@ public class UserInterface : MonoBehaviour
     private void HandlingHPChange(int hp)
     {
         hp_bar.value = player.GetHP()-hp;
-        Debug.Log("Current bar value: " + hp_bar.value + ", Player's HP: " + player.GetHP()+ ", MAX HP: "+player.GetMaxHP()) ;
+        //Debug.Log("Current bar value: " + hp_bar.value + ", Player's HP: " + player.GetHP()+ ", MAX HP: "+player.GetMaxHP()) ;
     }
     private void HandlingScoreChange(int score)
     {
