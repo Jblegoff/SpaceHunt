@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class UserInterface : MonoBehaviourSingleton<UserInterface>
 {
@@ -13,6 +14,8 @@ public class UserInterface : MonoBehaviourSingleton<UserInterface>
     [SerializeField] private Slider hp_bar;
     [SerializeField] private Player player;
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private  bool isPaused;
+    
 
     private void Awake()
    {
@@ -20,6 +23,7 @@ public class UserInterface : MonoBehaviourSingleton<UserInterface>
         player.OnHPChange    += HandlingHPChange;
         player.OnScoreChange += HandlingScoreChange;
         player.OnHPChange    += HandlingGameOver;
+       
 
    }
         // Start is called before the first frame update
@@ -32,6 +36,17 @@ public class UserInterface : MonoBehaviourSingleton<UserInterface>
     // Update is called once per frame
     void Update()
     {
+        Keyboard keyboard = Keyboard.current;
+        Mouse mouse = Mouse.current;
+        if (keyboard == null || mouse == null) return;//no keyboard or mouse connected
+
+        var gamepad = Gamepad.current;
+        if (gamepad == null) return; //no gamepad connected
+
+        if (gamepad.startButton.wasPressedThisFrame||keyboard.escapeKey.wasPressedThisFrame){
+            isPaused = !isPaused;
+            TooglePlayPause(isPaused);
+        }
     }
     private void HandlingHPChange(int hp)
     {
@@ -52,13 +67,20 @@ public class UserInterface : MonoBehaviourSingleton<UserInterface>
 
         }
     }
-    private void TooglePlayPause(bool pause)
+    public void TooglePlayPause(bool pause)
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) pause = true;
-        if (pause) pausePanel.SetActive(true);
+        if (pause) 
+        {
+            Time.timeScale = 0.0f;
+            pausePanel.SetActive(true);
+         
+        }
+        else
+        {
+            Time.timeScale = 1.0f;
+            pausePanel.SetActive(false);
+        }
         
-        else pausePanel.SetActive(false);
-        pause = false;
     }
    
 
