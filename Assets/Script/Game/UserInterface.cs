@@ -15,6 +15,8 @@ public class UserInterface : MonoBehaviourSingleton<UserInterface>
     [SerializeField] private Player player;
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private  bool isPaused;
+    public bool isGameOver;
+    
     
 
     private void Awake()
@@ -31,6 +33,7 @@ public class UserInterface : MonoBehaviourSingleton<UserInterface>
     {
         hp_bar.maxValue = player.GetMaxHP();
         hp_bar.value = player.GetMaxHP();
+        isGameOver = false;
     }
 
     // Update is called once per frame
@@ -47,6 +50,7 @@ public class UserInterface : MonoBehaviourSingleton<UserInterface>
             isPaused = !isPaused;
             TooglePlayPause(isPaused);
         }
+        
     }
     private void HandlingHPChange(int hp)
     {
@@ -62,11 +66,12 @@ public class UserInterface : MonoBehaviourSingleton<UserInterface>
     {
         if (player.GetHP() - hp == 0)
         {
+            PlayerPrefs.SetInt("score", player.GetScore());
             gameOver.SetActive(true);
-            playAgain.gameObject.SetActive(true);
-
+            
         }
     }
+   
     public void TooglePlayPause(bool pause)
     {
         if (pause) 

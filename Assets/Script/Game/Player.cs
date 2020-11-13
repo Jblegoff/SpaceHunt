@@ -10,6 +10,7 @@ public class Player : Entity
     [SerializeField] Camera m_MainCamera;
     [SerializeField] float m_Speed;
     public GameObject Bullet;
+    private String Playername;
     [SerializeField] private float shootFrenquency;
     Stopwatch stopwatch=new Stopwatch();
     
