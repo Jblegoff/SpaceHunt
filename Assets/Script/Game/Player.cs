@@ -3,17 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : Entity
 {
     [SerializeField] Camera m_MainCamera;
-    [SerializeField] float m_verticalSpeed;
-    [SerializeField] float m_horizontalSpeed;
+    [SerializeField] float m_Speed;
     public GameObject Bullet;
+    private String Playername;
     [SerializeField] private float shootFrenquency;
     Stopwatch stopwatch=new Stopwatch();
-    float height = Screen.height;
-    float width = Screen.width;
+    
     public int playerScore { get; set; }
     public delegate void OnHPChangeEvent(int hp);
     public event OnHPChangeEvent OnHPChange;
@@ -32,42 +32,45 @@ public class Player : Entity
         m_MainCamera = Camera.main;
         playerScore = 0;
         
-        
     }
     // Update is called once per frame
     void FixedUpdate()
     {
-        PlayerControl();       
+        PlayerControl(); 
     }
+
+
     void PlayerControl()
 
     {
-        Vector3 ScreenPosition = m_MainCamera.WorldToScreenPoint(transform.position);
+        
+        Keyboard keyboard = Keyboard.current;
+        Mouse mouse = Mouse.current;
+        if (keyboard == null || mouse == null) return;
+        
+        var gamepad = Gamepad.current;
+         if (gamepad == null) return; //no gamepad connected
+                                      
 
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        Vector3 moveDirection = gamepad.leftStick.ReadValue();
+        Vector3 moveThisFrame = Time.deltaTime * m_Speed * ((Vector3.right * moveDirection.x) + (Vector3.up * moveDirection.y));// Make movement speed frame-rate independent
+        transform.position += moveThisFrame;
 
-        if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.LeftArrow))
-        {
-            if (ScreenPosition.x < 0) return;
-            this.transform.position += Vector3.left * m_horizontalSpeed * Time.deltaTime;
-        } 
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            if (ScreenPosition.x > width) return;
-            transform.position += Vector3.right * m_horizontalSpeed * Time.deltaTime;
-        } 
-        if (Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.UpArrow))
-        {
-            if (ScreenPosition.y > height) return;
-            transform.position += Vector3.up * m_verticalSpeed * Time.deltaTime;
-        } 
-        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-        {
-            if (ScreenPosition.y < 0) return;
-            transform.position += Vector3.down * m_verticalSpeed * Time.deltaTime;
-        }
-        if ( Input.GetKey(KeyCode.Space))
+        float vertical = keyboard.wKey.ReadValue()
+                      - keyboard.sKey.ReadValue();
+        float horizontal = keyboard.dKey.ReadValue()
+                         - keyboard.aKey.ReadValue();
+       // Make movement speed frame-rate independent 
+        Vector3 moveFrame =Time.deltaTime * m_Speed *((Vector3.right * horizontal) + (Vector3.up * vertical) );
+
+        transform.position += moveFrame;
+
+        Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position); 
+        viewPos.x = Mathf.Clamp01(viewPos.x); 
+        viewPos.y = Mathf.Clamp01(viewPos.y); 
+        transform.position = Camera.main.ViewportToWorldPoint(viewPos);
+
+        if (gamepad.aButton.isPressed||keyboard.spaceKey.isPressed)
         {
             stopwatch.Stop();
             TimeSpan ts = stopwatch.Elapsed;

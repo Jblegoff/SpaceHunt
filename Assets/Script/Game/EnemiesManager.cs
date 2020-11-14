@@ -10,12 +10,14 @@ public class EnemiesManager : MonoBehaviour
     [SerializeField] float enemiesSpawnTime;
     private IEnumerator coroutine;
     [SerializeField] private Camera m_camera;
+    
     // Start is called before the first frame update
     void Start()
     {
         if ( Application.isPlaying ) {
             coroutine = SpawnEnemies(enemiesSpawnTime);
             StartCoroutine(coroutine);
+           
         }
     }
     void Awaker()
