@@ -21,10 +21,6 @@ public class UserInterface : MonoBehaviourSingleton<UserInterface>
 
     private void Awake()
     {
-        player.OnHPChange += HandlingHPChange;
-        player.OnScoreChange += HandlingScoreChange;
-        player.OnHPChange += HandlingGameOver;
-   {
         base.Awake();
         player.OnHPChange    += HandlingHPChange;
         player.OnScoreChange += HandlingScoreChange;
@@ -58,8 +54,6 @@ public class UserInterface : MonoBehaviourSingleton<UserInterface>
     }
     private void HandlingHPChange(int hp)
     {
-        hp_bar.value = player.GetHP() - hp;
-        Debug.Log("Current bar value: " + hp_bar.value + ", Player's HP: " + player.GetHP() + ", MAX HP: " + player.GetMaxHP());
         hp_bar.value = player.GetHP()-hp;
         //Debug.Log("Current bar value: " + hp_bar.value + ", Player's HP: " + player.GetHP()+ ", MAX HP: "+player.GetMaxHP()) ;
     }
@@ -80,11 +74,7 @@ public class UserInterface : MonoBehaviourSingleton<UserInterface>
    
     public void TooglePlayPause(bool pause)
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) pause = true;
-        if (pause) pausePanel.SetActive(true);
 
-        else pausePanel.SetActive(false);
-        pause = false;
         if (pause) 
         {
             Time.timeScale = 0.0f;

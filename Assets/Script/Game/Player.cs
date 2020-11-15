@@ -12,8 +12,8 @@ public class Player : Entity
     public GameObject Bullet;
     private String Playername;
     [SerializeField] private float shootFrenquency;
-    Stopwatch stopwatch=new Stopwatch();
-    
+    Stopwatch stopwatch = new Stopwatch();
+
     public int playerScore { get; set; }
     public delegate void OnHPChangeEvent(int hp);
     public event OnHPChangeEvent OnHPChange;
@@ -23,7 +23,7 @@ public class Player : Entity
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
     public override void Awake()
     {
@@ -31,26 +31,26 @@ public class Player : Entity
         stopwatch.Start();
         m_MainCamera = Camera.main;
         playerScore = 0;
-        
+
     }
     // Update is called once per frame
     void FixedUpdate()
     {
-        PlayerControl(); 
+        PlayerControl();
     }
 
 
     void PlayerControl()
 
     {
-        
+
         Keyboard keyboard = Keyboard.current;
         Mouse mouse = Mouse.current;
         if (keyboard == null || mouse == null) return;
-        
+
         var gamepad = Gamepad.current;
-         if (gamepad == null) return; //no gamepad connected
-                                      
+        if (gamepad == null) return; //no gamepad connected
+
 
         Vector3 moveDirection = gamepad.leftStick.ReadValue();
         Vector3 moveThisFrame = Time.deltaTime * m_Speed * ((Vector3.right * moveDirection.x) + (Vector3.up * moveDirection.y));// Make movement speed frame-rate independent
@@ -60,17 +60,17 @@ public class Player : Entity
                       - keyboard.sKey.ReadValue();
         float horizontal = keyboard.dKey.ReadValue()
                          - keyboard.aKey.ReadValue();
-       // Make movement speed frame-rate independent 
-        Vector3 moveFrame =Time.deltaTime * m_Speed *((Vector3.right * horizontal) + (Vector3.up * vertical) );
+        // Make movement speed frame-rate independent 
+        Vector3 moveFrame = Time.deltaTime * m_Speed * ((Vector3.right * horizontal) + (Vector3.up * vertical));
 
         transform.position += moveFrame;
 
-        Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position); 
-        viewPos.x = Mathf.Clamp01(viewPos.x); 
-        viewPos.y = Mathf.Clamp01(viewPos.y); 
+        Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position);
+        viewPos.x = Mathf.Clamp01(viewPos.x);
+        viewPos.y = Mathf.Clamp01(viewPos.y);
         transform.position = Camera.main.ViewportToWorldPoint(viewPos);
 
-        if (gamepad.aButton.isPressed||keyboard.spaceKey.isPressed)
+        if (gamepad.aButton.isPressed || keyboard.spaceKey.isPressed)
         {
             stopwatch.Stop();
             TimeSpan ts = stopwatch.Elapsed;
@@ -78,13 +78,13 @@ public class Player : Entity
             {
                 stopwatch.Reset();
                 stopwatch.Start();
-               GameObject Bullet_instance= Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
+                GameObject Bullet_instance = Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
                 Bullet_instance.GetComponent<Bullet>().OnBulletHit += OnBulletHitPlayer;
             }
             else stopwatch.Start();
-       
+
         }
-        
+
     }
 
     void OnCollisionEnter(Collision collision)
@@ -101,7 +101,7 @@ public class Player : Entity
     {
         playerScore += score;
         OnScoreChange?.Invoke(score);
-        
+
         UnityEngine.Debug.Log("SCORE: " + playerScore);
     }
     public int GetHP()
