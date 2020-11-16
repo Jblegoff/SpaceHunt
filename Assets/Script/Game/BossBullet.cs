@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class BossBullet : MonoBehaviour
 {
     [SerializeField] float speed;
     Camera m_camera;
-    private GameObject player = null;
+    private Vector3 direction;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (player == null) player = GameObject.Find("Player");
+        direction = (new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), 0.0f)).normalized;
     }
 
     void Awake()
@@ -21,17 +22,20 @@ public class BossBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //StartCoroutine(Movement());
         Movement();
     }
 
     void Movement()
     {
 
+       
         Vector3 screenpos = m_camera.WorldToScreenPoint(transform.position);
         if (screenpos.y >= Screen.height || screenpos.y <= 0 || screenpos.x >= Screen.width || screenpos.x <= 0) Destroy(gameObject, 0f);
-        else transform.Translate( player.transform.position* speed * Time.deltaTime);
-        //yield return new WaitForSeconds(1.0f);
+        else
+        {
+            transform.position += direction * speed * Time.deltaTime;
+        }
+
     }
     void OnCollisionEnter(Collision collision)
     {

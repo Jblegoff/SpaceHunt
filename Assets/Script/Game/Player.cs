@@ -89,7 +89,7 @@ public class Player : Entity
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.rigidbody.tag == "Enemy")
+        if (collision.rigidbody.tag == "Enemy" || collision.rigidbody.tag == "Boss" || collision.rigidbody.tag == "BulletBoss")
         {
             OnHPChange?.Invoke(1);
             loseHP(1);

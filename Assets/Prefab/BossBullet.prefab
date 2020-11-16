@@ -4918,7 +4918,7 @@ Transform:
   m_GameObject: {fileID: 3682435696195556680}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 3965273062349297743}
   m_RootOrder: 1
@@ -9640,7 +9640,7 @@ ParticleSystemRenderer:
   m_ApplyActiveColorSpace: 0
   m_AllowRoll: 1
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
@@ -9656,7 +9656,7 @@ GameObject:
   - component: {fileID: 3965273062349297743}
   - component: {fileID: 4539265338131993675}
   - component: {fileID: 7549382959872341434}
-  - component: {fileID: 8613195221609061981}
+  - component: {fileID: 8773490929117097277}
   m_Layer: 0
   m_Name: BossBullet
   m_TagString: Untagged
@@ -9673,7 +9673,7 @@ Transform:
   m_GameObject: {fileID: 4833621791192712089}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 492562966767432345}
   - {fileID: 2512702511422359135}
@@ -9710,7 +9710,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &8613195221609061981
+--- !u!114 &8773490929117097277
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9719,7 +9719,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4833621791192712089}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1701a1320773b18419ff95673b247094, type: 3}
+  m_Script: {fileID: 11500000, guid: 961d8b1640e3ffd48a1b1fa500d86530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 7
