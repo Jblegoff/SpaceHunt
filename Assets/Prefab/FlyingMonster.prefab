@@ -151,3 +151,5 @@ MonoBehaviour:
     type: 3}
   timeBtwShot: 0
   startTimeBtwShot: 2
+  frequency: 10
+  magnitude: 0.7

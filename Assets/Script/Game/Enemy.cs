@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,25 +10,41 @@ public class Enemy : Entity
     [SerializeField] GameObject enemyBullet;
     [SerializeField] private float timeBtwShot;
     public float startTimeBtwShot;
-    Transform player;
-    
-
-   public override void Awake()
+    bool MovingRight=true;
+    [SerializeField] float frequency = 20f;
+    public float magnitude = 0.5f;
+    Vector3 pos,localScale;
+    Vector3 screenpos; 
+    public override void Awake()
     {
         base.Awake();
-        m_camera = Camera.main;
+        m_camera = Camera.main; 
+        
     }
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
         timeBtwShot = startTimeBtwShot;
+        localScale = transform.localScale;
+        pos = transform.position;
+        screenpos= m_camera.WorldToScreenPoint(transform.position);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Movement();
+       
+        
+        
+        CheckWhereToMove();
+        if (MovingRight)
+        {
+            MoveRight();
+        }
+        else
+        {
+            MoveLeft();
+        }
         
         if (timeBtwShot <= 0 )
         {
@@ -41,16 +58,38 @@ public class Enemy : Entity
         
     }
 
+    private void MoveRight()
+    {
+        pos += transform.right * Time.deltaTime * speed;
+        transform.position = pos + transform.up * Mathf.Sin(Time.time * frequency) * magnitude;
+    }
+
+    private void MoveLeft()
+    {
+        pos -= transform.right * Time.deltaTime * speed;
+        transform.position = pos + transform.up * Mathf.Sin(Time.time * frequency) * magnitude;
+    }
+
+    private void CheckWhereToMove()
+    {
+        if (transform.position.x < -7f)
+            MovingRight = true;
+        else if (transform.position.x > 7f)
+            MovingRight = false;
+        if (((MovingRight) && (localScale.x < 0)) || ((!MovingRight) && (localScale.x > 0))) ;
+               localScale.x *= -1;
+        transform.localScale = localScale;
+    }
+
     void Movement()
     {
-        Vector3 screenpos = m_camera.WorldToScreenPoint(transform.position);
+        
         if (screenpos.y <= 0) 
             Destroy(gameObject, 0f);
         if (screenpos.y > Screen.height / 2) 
             transform.Translate(Vector3.down * speed * Time.deltaTime);
-
-        
     }
+    
     
     void OnCollisionEnter(Collision collision)
     {

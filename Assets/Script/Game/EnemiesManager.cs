@@ -20,6 +20,7 @@ public class EnemiesManager : MonoBehaviour
     }
 
     public Wave[] waves;
+    public Transform[] spawnPoints;
     public GameObject Boss;
     private int nextWave = 0;
     public float timeBetweenWaves = 5f;
@@ -122,7 +123,7 @@ public class EnemiesManager : MonoBehaviour
     void SpawnEnemy(GameObject _enemy)
     {
         Debug.Log("Spawning enemy: " + _enemy.name);
-        Vector3 spawnLocation = m_camera.ScreenToWorldPoint(new Vector3(Random.Range(20, m_camera.pixelWidth), m_camera.pixelHeight, -m_camera.transform.position.z));
-        Instantiate(_enemy,spawnLocation,Quaternion.identity);
+        Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        Instantiate(_enemy,new Vector3(_sp.position.x,_sp.position.y,0),_sp.rotation);
     }
 }
