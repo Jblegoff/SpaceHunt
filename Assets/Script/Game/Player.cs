@@ -93,7 +93,7 @@ public class Player : Entity
         {
             OnHPChange?.Invoke(1);
             loseHP(1);
-            UnityEngine.Debug.Log("Player HP: " + Current_HP);
+           // UnityEngine.Debug.Log("Player HP: " + Current_HP);
         }
         if (Current_HP <= 0) Destroy(gameObject);
     }
@@ -102,7 +102,7 @@ public class Player : Entity
         playerScore += score;
         OnScoreChange?.Invoke(score);
 
-        UnityEngine.Debug.Log("SCORE: " + playerScore);
+       // UnityEngine.Debug.Log("SCORE: " + playerScore);
     }
     public int GetHP()
     {

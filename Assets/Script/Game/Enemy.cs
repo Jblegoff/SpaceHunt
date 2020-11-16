@@ -6,6 +6,11 @@ public class Enemy : Entity
 {
     [SerializeField] float speed;
     Camera m_camera;
+    [SerializeField] GameObject enemyBullet;
+    [SerializeField] private float timeBtwShot;
+    public float startTimeBtwShot;
+    Transform player;
+    
 
    public override void Awake()
     {
@@ -15,21 +20,38 @@ public class Enemy : Entity
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        timeBtwShot = startTimeBtwShot;
     }
 
     // Update is called once per frame
     void Update()
     {
         Movement();
+        
+        if (timeBtwShot <= 0 )
+        {
+            Instantiate(enemyBullet, new Vector3(transform.position.x, transform.position.y - 1, transform.position.z), Quaternion.identity);
+            timeBtwShot = startTimeBtwShot;
+        }
+        else
+        {
+            timeBtwShot -= Time.deltaTime;
+        }
+        
     }
 
     void Movement()
     {
         Vector3 screenpos = m_camera.WorldToScreenPoint(transform.position);
-        if (screenpos.y < 0) Destroy(gameObject, 0f);
-        if (screenpos.y > 0) transform.Translate(Vector3.down * speed * Time.deltaTime);
+        if (screenpos.y <= 0) 
+            Destroy(gameObject, 0f);
+        if (screenpos.y > Screen.height / 2) 
+            transform.Translate(Vector3.down * speed * Time.deltaTime);
+
+        
     }
+    
     void OnCollisionEnter(Collision collision)
     {
         // Debug-draw all contact points and normals

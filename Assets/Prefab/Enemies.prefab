@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 1370040663385979058}
   - component: {fileID: 913031964929079418}
   - component: {fileID: 2000662642711941232}
-  - component: {fileID: 556344263717471431}
   - component: {fileID: -3048623966276219086}
+  - component: {fileID: 6841778660350044059}
   m_Layer: 0
   m_Name: Enemies
   m_TagString: Enemy
@@ -95,20 +95,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &556344263717471431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8060233503481939095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3ccc9f611d53f64780b83eae09af52a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  max_HP: 1
-  speed: 2
 --- !u!54 &-3048623966276219086
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -125,3 +111,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &6841778660350044059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8060233503481939095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 503d1207bf4dddc46b6032ff6e9f4b87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
