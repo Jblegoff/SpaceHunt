@@ -14,7 +14,7 @@ public class Boss : Entity
     Stopwatch stopwatch = new Stopwatch();
     public Vector3 target;
 
-
+    bool m_isDestroyed = false;
     public delegate void OnHPChangeEvent(int hp);
     public event OnHPChangeEvent OnHPChange;
     public void Awake()
@@ -81,6 +81,7 @@ public class Boss : Entity
         }
         if (Current_HP <= 0) Destroy(gameObject);
     }
+    
     public int GetHP()
     {
         return Current_HP;

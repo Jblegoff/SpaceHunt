@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 491391368f4ba524c991e0feb8227340, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max_HP: 50
+  max_HP: 30
   speed: 2
   BossBullet: {fileID: 4833621791192712089, guid: c4c2f26f74e7f1d4b9d4d80c21978927,
     type: 3}

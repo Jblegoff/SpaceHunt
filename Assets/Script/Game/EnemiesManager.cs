@@ -20,15 +20,16 @@ public class EnemiesManager : MonoBehaviour
         public int count;
         public float rate;
     }
-    private Boss boss;
+    
     public Wave[] waves;
     public Transform[] spawnPoints;
-    public GameObject Boss;
-    private int nextWave = 0;
+    public Boss Boss;
+    public int nextWave = 0;
     public float timeBetweenWaves = 5f;
     public float waveCountdown;
 
     private float searchCountdown = 1f;
+    private float searchCountdownBoss = 5f;
 
     private SpawnState state = SpawnState.COUNTING;
     void Start()
@@ -52,6 +53,7 @@ public class EnemiesManager : MonoBehaviour
                 //Begin a new round
                 WaveCompleted();
             }
+            
             else
             {
                 return;
@@ -69,12 +71,7 @@ public class EnemiesManager : MonoBehaviour
         {
             waveCountdown -= Time.deltaTime;
         }
-        if (boss.Current_HP <= 0)
-        {
-            PlayerPrefs.SetInt("score", player.GetScore());
-            UI.transform.Find("GameOver").gameObject.SetActive(true);
-        }
-
+        
     }
 
     private IEnumerator SpawnWave(Wave _wave)
@@ -106,6 +103,7 @@ public class EnemiesManager : MonoBehaviour
         }
         return true;
     }
+
     void WaveCompleted()
     {
         Debug.Log("WaveCompleted");
@@ -117,8 +115,7 @@ public class EnemiesManager : MonoBehaviour
             state = SpawnState.SPAWNING;
             Debug.Log("All wave complete");
 
-            SpawnEnemy(Boss);
-            boss = GameObject.FindGameObjectWithTag("Boss").GetComponent<Boss>();
+            Boss.gameObject.SetActive(true);
 
         }
         else

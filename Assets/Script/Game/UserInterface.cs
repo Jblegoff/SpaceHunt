@@ -14,6 +14,7 @@ public class UserInterface : MonoBehaviourSingleton<UserInterface>
     [SerializeField] private Text scoreText;
     [SerializeField] private Slider hp_bar;  
     [SerializeField] private Player player;
+    [SerializeField] private Boss boss;
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private  bool isPaused;
     public bool isGameOver;
@@ -26,10 +27,10 @@ public class UserInterface : MonoBehaviourSingleton<UserInterface>
         player.OnHPChange += HandlingHPChange;
         player.OnScoreChange += HandlingScoreChange;
         player.OnHPChange += HandlingGameOver;
+        boss.OnHPChange += HandlingVictory;
+
      
     }
-
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +56,16 @@ public class UserInterface : MonoBehaviourSingleton<UserInterface>
         }
         
     }
+    private void HandlingVictory(int hp)
+    {
+        if (boss.GetHP() - hp == 0)
+        {
+            PlayerPrefs.SetInt("score", player.GetScore());
+            gameOver.SetActive(true);
+
+        }
+
+    }
     private void HandlingHPChange(int hp)
     {
         hp_bar.value = player.GetHP();
@@ -73,6 +84,7 @@ public class UserInterface : MonoBehaviourSingleton<UserInterface>
             gameOver.SetActive(true);
             
         }
+        
     }
    
     public void TooglePlayPause(bool pause)
