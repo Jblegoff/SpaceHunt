@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8418570864849999008}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Enemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,3 +151,4 @@ MonoBehaviour:
     type: 3}
   shootFrenquency: 0.2
   m_camera: {fileID: 0}
+  target: {x: 0, y: 0, z: 0}

@@ -145,11 +145,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ccc9f611d53f64780b83eae09af52a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max_HP: 1
+  max_HP: 2
   speed: 6
   enemyBullet: {fileID: 5466614089522759692, guid: 751c10828bad8b946bcaba8ac6aae81e,
     type: 3}
+  Bonus: {fileID: 6251039614718529821, guid: 82e2d89bb0d32f545a11f85f97f92eb9, type: 3}
   timeBtwShot: 0
-  startTimeBtwShot: 2
+  startTimeBtwShot: 1
   frequency: 10
   magnitude: 0.7

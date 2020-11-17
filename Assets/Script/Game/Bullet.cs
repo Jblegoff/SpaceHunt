@@ -44,5 +44,11 @@ public class Bullet : MonoBehaviour
             OnBulletHit?.Invoke(score);
             Destroy(gameObject);
         }
+        if(collision.rigidbody.tag == "Boss")
+        {
+            score += 300;
+            OnBulletHit?.Invoke(score);
+            Destroy(gameObject);
+        }
     }
 }

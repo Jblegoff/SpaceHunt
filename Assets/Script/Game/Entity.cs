@@ -16,7 +16,10 @@ public class Entity : MonoBehaviour
     {
         _current_HP -= lost_HP;
     }
-
+    protected void restoreHp(int healed_HP)
+    {
+        _current_HP += healed_HP;
+    }
     // Start is called before the first frame update
     public virtual void Awake()
     {

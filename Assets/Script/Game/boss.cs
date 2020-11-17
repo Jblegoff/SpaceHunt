@@ -5,7 +5,7 @@ using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class boss : Entity
+public class Boss : Entity
 {
     [SerializeField] float speed;
     public GameObject BossBullet;
@@ -13,9 +13,10 @@ public class boss : Entity
     [SerializeField] Camera m_camera;
     Stopwatch stopwatch = new Stopwatch();
     public Vector3 target;
-    
 
 
+    public delegate void OnHPChangeEvent(int hp);
+    public event OnHPChangeEvent OnHPChange;
     public void Awake()
     {
         base.Awake();
@@ -75,8 +76,13 @@ public class boss : Entity
     {
         if (collision.rigidbody.tag == "Bullet")
         {
+            OnHPChange?.Invoke(1);
             loseHP(1);
         }
         if (Current_HP <= 0) Destroy(gameObject);
+    }
+    public int GetHP()
+    {
+        return Current_HP;
     }
 }

@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemiesManager : MonoBehaviour
 {
     
     [SerializeField] private Camera m_camera;
-    GameObject UI;
+    [SerializeField] private GameObject UI;
+    [SerializeField] Player player;
     private enum SpawnState { SPAWNING, WAITING, COUNTING}
 
     [System.Serializable]
@@ -18,7 +20,7 @@ public class EnemiesManager : MonoBehaviour
         public int count;
         public float rate;
     }
-
+    private Boss boss;
     public Wave[] waves;
     public Transform[] spawnPoints;
     public GameObject Boss;
@@ -32,7 +34,7 @@ public class EnemiesManager : MonoBehaviour
     void Start()
     {
         waveCountdown = timeBetweenWaves;
-        UI = GameObject.FindGameObjectWithTag("UI");
+        
     }
     void Awake()
     {
@@ -66,6 +68,11 @@ public class EnemiesManager : MonoBehaviour
         else
         {
            waveCountdown -= Time.deltaTime;
+        }
+        if (boss.Current_HP <= 0)
+        {
+            PlayerPrefs.SetInt("score", player.GetScore());
+            UI.transform.Find("GameOver").gameObject.SetActive(true);
         }
         
     }
@@ -110,7 +117,8 @@ public class EnemiesManager : MonoBehaviour
             state = SpawnState.SPAWNING;
             Debug.Log("All wave complete");
 
-            SpawnEnemy(Boss);           
+            SpawnEnemy(Boss);
+            boss = GameObject.FindGameObjectWithTag("Boss").GetComponent<Boss>();
             
         }
         else 
@@ -119,7 +127,7 @@ public class EnemiesManager : MonoBehaviour
         }
         
     }
-
+   
     void SpawnEnemy(GameObject _enemy)
     {
         Debug.Log("Spawning enemy: " + _enemy.name);

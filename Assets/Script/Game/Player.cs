@@ -95,6 +95,10 @@ public class Player : Entity
             loseHP(1);
            // UnityEngine.Debug.Log("Player HP: " + Current_HP);
         }
+        if (collision.rigidbody.tag == "Healthpack") {
+            OnHPChange?.Invoke(3);
+            restoreHp(3);
+        }
         if (Current_HP <= 0) Destroy(gameObject);
     }
     private void OnBulletHitPlayer(int score)

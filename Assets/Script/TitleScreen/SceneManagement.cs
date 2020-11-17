@@ -29,6 +29,9 @@ public class SceneManagement : MonoBehaviour
         SceneManager.LoadScene("Title Screen");
     }
 
-   
+   public void ExitGame()
+    {
+        Application.Quit();
+    }
 
 }

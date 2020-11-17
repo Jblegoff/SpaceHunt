@@ -8,6 +8,7 @@ public class Enemy : Entity
     [SerializeField] float speed;
     Camera m_camera;
     [SerializeField] GameObject enemyBullet;
+    [SerializeField] GameObject Bonus;
     [SerializeField] private float timeBtwShot;
     public float startTimeBtwShot;
     bool MovingRight=true;
@@ -15,6 +16,7 @@ public class Enemy : Entity
     public float magnitude = 0.5f;
     Vector3 pos,localScale;
     Vector3 screenpos; 
+
     public override void Awake()
     {
         base.Awake();
@@ -33,9 +35,6 @@ public class Enemy : Entity
     // Update is called once per frame
     void Update()
     {
-       
-        
-        
         CheckWhereToMove();
         if (MovingRight)
         {
@@ -80,16 +79,6 @@ public class Enemy : Entity
                localScale.x *= -1;
         transform.localScale = localScale;
     }
-
-    void Movement()
-    {
-        
-        if (screenpos.y <= 0) 
-            Destroy(gameObject, 0f);
-        if (screenpos.y > Screen.height / 2) 
-            transform.Translate(Vector3.down * speed * Time.deltaTime);
-    }
-    
     
     void OnCollisionEnter(Collision collision)
     {
@@ -105,9 +94,15 @@ public class Enemy : Entity
             //Debug.Log("Ennemy HP : " + Current_HP);
         }
 
-        if (Current_HP <= 0)  // If the player has nno HP , he dies 
+        if (Current_HP <= 0)  // If the character has no HP , he dies 
         {
             Destroy(gameObject);
+            float random = UnityEngine.Random.Range(0, 30);
+            Debug.Log("Random Number is: " + random);
+            if (random > 20)
+            {
+               Instantiate(Bonus, transform.position, Quaternion.identity);   
+            }
         }
     }
     }
