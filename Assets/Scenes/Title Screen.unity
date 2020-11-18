@@ -300,7 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -505,7 +505,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 14.107754
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -557,8 +557,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 1.3113556
+  MaxDistance: 126.52316
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -747,7 +747,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 250905858}
-        m_MethodName: LauchCredit
+        m_MethodName: LaunchCredit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1042,7 +1042,7 @@ RectTransform:
   m_GameObject: {fileID: 1402206068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 50}
-  m_LocalScale: {x: 20, y: 12, z: 1}
+  m_LocalScale: {x: 31, y: 22, z: 1}
   m_Children: []
   m_Father: {fileID: 250905857}
   m_RootOrder: 4

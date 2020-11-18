@@ -147,7 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   max_HP: 0
   speed: 0
-  BossBullet: {fileID: 6027278210001198833, guid: e0b74dc2ab1c21943bddaacd936af5a9,
+  BossBullet: {fileID: 4833621791192712089, guid: c4c2f26f74e7f1d4b9d4d80c21978927,
     type: 3}
   shootFrenquency: 0
   m_camera: {fileID: 0}

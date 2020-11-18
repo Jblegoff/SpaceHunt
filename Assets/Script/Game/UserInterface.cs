@@ -28,8 +28,11 @@ public class UserInterface : MonoBehaviourSingleton<UserInterface>
         player.OnHPChange += HandlingHPChange;
         player.OnScoreChange += HandlingScoreChange;
         player.OnHPChange += HandlingGameOver;
-        boss.OnHPChange += HandlingVictory;
-        boss.OnHPChange += HandlingBossHPChange;
+        if (boss.enabled)
+        {
+            boss.OnHPChange += HandlingVictory;
+            boss.OnHPChange += HandlingBossHPChange;
+        }
      
     }
 
@@ -69,6 +72,7 @@ public class UserInterface : MonoBehaviourSingleton<UserInterface>
         {
             PlayerPrefs.SetInt("score", player.GetScore());
             victory.SetActive(true);
+            isGameOver = true;
 
         }
 
@@ -97,6 +101,7 @@ public class UserInterface : MonoBehaviourSingleton<UserInterface>
         {
             PlayerPrefs.SetInt("score", player.GetScore());
             gameOver.SetActive(true);
+            isGameOver = true;
             
         }
         
@@ -117,6 +122,10 @@ public class UserInterface : MonoBehaviourSingleton<UserInterface>
             pausePanel.SetActive(false);
         }
         
+    }
+    public void OnDestroy()
+    {
+        Destroy(gameObject);
     }
 
 

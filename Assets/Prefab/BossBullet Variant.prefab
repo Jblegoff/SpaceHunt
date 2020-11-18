@@ -72,5 +72,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossBullet Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 6647521094724059559, guid: 2a4888fc0be7af64297631a49676cf89,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a4888fc0be7af64297631a49676cf89, type: 3}

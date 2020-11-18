@@ -131,4 +131,8 @@ public class EnemiesManager : MonoBehaviour
         Transform _sp = spawnPoints[Random.Range(2, spawnPoints.Length)];
         Instantiate(_enemy, new Vector3(_sp.position.x, _sp.position.y, 0), _sp.rotation);
     }
+    public void OnDestroy()
+    {
+        Destroy(gameObject);
+    }
 }

@@ -78,7 +78,7 @@ public class Player : Entity
             {
                 stopwatch.Reset();
                 stopwatch.Start();
-                GameObject Bullet_instance = Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
+                GameObject Bullet_instance = Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y -1, transform.position.z), Quaternion.identity);
                 Bullet_instance.GetComponent<Bullet>().OnBulletHit += OnBulletHitPlayer;
             }
             else stopwatch.Start();
@@ -96,8 +96,7 @@ public class Player : Entity
            // UnityEngine.Debug.Log("Player HP: " + Current_HP);
         }
         if (collision.rigidbody.tag == "Healthpack") {
-            OnHPChange?.Invoke(3);
-            restoreHp(3);
+            restoreHp(5);
         }
         if (Current_HP <= 0) Destroy(gameObject);
     }
