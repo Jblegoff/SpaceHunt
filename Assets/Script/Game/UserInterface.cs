@@ -10,9 +10,10 @@ using System;
 public class UserInterface : MonoBehaviourSingleton<UserInterface>
 {
     public GameObject gameOver;
-    [SerializeField] private Button playAgain;
+    public GameObject victory;
     [SerializeField] private Text scoreText;
     [SerializeField] private Slider hp_bar;  
+    [SerializeField] private Slider hp_boss;  
     [SerializeField] private Player player;
     [SerializeField] private Boss boss;
     [SerializeField] private GameObject pausePanel;
@@ -28,15 +29,20 @@ public class UserInterface : MonoBehaviourSingleton<UserInterface>
         player.OnScoreChange += HandlingScoreChange;
         player.OnHPChange += HandlingGameOver;
         boss.OnHPChange += HandlingVictory;
-
+        boss.OnHPChange += HandlingBossHPChange;
      
     }
+
+   
+
     // Start is called before the first frame update
     void Start()
     {
         hp_bar.maxValue = player.GetMaxHP();
         hp_bar.value = player.GetMaxHP();
         isGameOver = false;
+        hp_boss.maxValue = boss.GetMaxHP();
+        hp_boss.value = boss.GetHP();
         
     }
 
@@ -54,6 +60,7 @@ public class UserInterface : MonoBehaviourSingleton<UserInterface>
             isPaused = !isPaused;
             TooglePlayPause(isPaused);
         }
+       
         
     }
     private void HandlingVictory(int hp)
@@ -61,14 +68,22 @@ public class UserInterface : MonoBehaviourSingleton<UserInterface>
         if (boss.GetHP() - hp == 0)
         {
             PlayerPrefs.SetInt("score", player.GetScore());
-            gameOver.SetActive(true);
+            victory.SetActive(true);
 
         }
 
+    } 
+    private void HandlingBossHPChange(int hp)
+    {
+        if (boss.isActiveAndEnabled)
+        {
+            hp_boss.gameObject.SetActive(true);
+            hp_boss.value = boss.GetHP() - hp;
+        }
     }
     private void HandlingHPChange(int hp)
     {
-        hp_bar.value = player.GetHP();
+        hp_bar.value = player.GetHP()-hp;
         //Debug.Log("Current bar value: " + hp_bar.value + ", Player's HP: " + player.GetHP()+ ", MAX HP: "+player.GetMaxHP()) ;
     }
     private void HandlingScoreChange(int score)
