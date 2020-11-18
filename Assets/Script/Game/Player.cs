@@ -62,10 +62,17 @@ public class Player : Entity
                       - keyboard.sKey.ReadValue();
         float horizontal = keyboard.dKey.ReadValue()
                          - keyboard.aKey.ReadValue();
+        float vertical_Arrow = keyboard.upArrowKey.ReadValue()
+                      - keyboard.downArrowKey.ReadValue();
+        float horizontal_Arrow = keyboard.rightArrowKey.ReadValue()
+                         - keyboard.leftArrowKey.ReadValue();
         // Make movement speed frame-rate independent 
         Vector3 moveFrame = Time.deltaTime * m_Speed * ((Vector3.right * horizontal) + (Vector3.up * vertical));
+        Vector3 moveFrame_Arrow = Time.deltaTime * m_Speed * ((Vector3.right * horizontal_Arrow) + (Vector3.up * vertical_Arrow));
+     
 
         transform.position += moveFrame;
+        transform.position += moveFrame_Arrow;
 
         Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position);
         viewPos.x = Mathf.Clamp01(viewPos.x);
