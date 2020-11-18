@@ -15,8 +15,10 @@ public class Player : Entity
     Stopwatch stopwatch = new Stopwatch();
 
     public int playerScore { get; set; }
-    public delegate void OnHPChangeEvent(int hp);
-    public event OnHPChangeEvent OnHPChange;
+    public delegate void OnHPLossEvent(int hp);
+    public event OnHPLossEvent OnHPLoss;
+    public delegate void OnHPRestoredEvent(int hp);
+    public event OnHPRestoredEvent OnHPRestored;
 
     public delegate void OnScoreChangeEvent(int score);
     public event OnScoreChangeEvent OnScoreChange;
@@ -89,13 +91,14 @@ public class Player : Entity
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.rigidbody.tag == "Enemy" || collision.rigidbody.tag == "Boss" || collision.rigidbody.tag == "BulletBoss")
+        if (collision.rigidbody.tag == "Enemy" || collision.rigidbody.tag == "Boss" || collision.rigidbody.tag == "BulletBoss"|| collision.rigidbody.tag == "EnemyBullet")
         {
-            OnHPChange?.Invoke(1);
+            OnHPLoss?.Invoke(1);
             loseHP(1);
            // UnityEngine.Debug.Log("Player HP: " + Current_HP);
         }
         if (collision.rigidbody.tag == "Healthpack") {
+            OnHPRestored?.Invoke(5);
             restoreHp(5);
         }
         if (Current_HP <= 0) Destroy(gameObject);

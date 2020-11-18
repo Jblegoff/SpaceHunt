@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -329,6 +329,18 @@ MonoBehaviour:
     enemy: {fileID: 1548593766413804, guid: a2a3dd4b2b2a74041a57a6a0639b13b9, type: 3}
     count: 5
     rate: 1
+  - name: 'Monster Attack '
+    enemy: {fileID: 1548593766413804, guid: a2a3dd4b2b2a74041a57a6a0639b13b9, type: 3}
+    count: 7
+    rate: 1.2
+  - name: 'Monster Attack '
+    enemy: {fileID: 1548593766413804, guid: a2a3dd4b2b2a74041a57a6a0639b13b9, type: 3}
+    count: 9
+    rate: 1.5
+  - name: 'Monster Attack '
+    enemy: {fileID: 1548593766413804, guid: a2a3dd4b2b2a74041a57a6a0639b13b9, type: 3}
+    count: 12
+    rate: 2
   spawnPoints:
   - {fileID: 1089312270}
   - {fileID: 1640483867}
@@ -1798,7 +1810,7 @@ Canvas:
   m_RenderMode: 1
   m_Camera: {fileID: 963194227}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -3141,7 +3153,7 @@ PrefabInstance:
     - target: {fileID: 119812207604474921, guid: dcf76343326e5514abbe873a7967f41b,
         type: 3}
       propertyPath: shootFrenquency
-      value: 1
+      value: 0.15
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8418570864849999008, guid: dcf76343326e5514abbe873a7967f41b, type: 3}

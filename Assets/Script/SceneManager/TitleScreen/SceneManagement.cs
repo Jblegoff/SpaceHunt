@@ -13,23 +13,27 @@ public class SceneManagement : MonoBehaviour
 
    public void LaunchGame()
     {
-        SceneManager.LoadSceneAsync("Level1", LoadSceneMode.Single);
+        SceneManager.LoadScene(1, LoadSceneMode.Single);
         
     }
 
     public void LaunchScore()
     {
-        SceneManager.LoadSceneAsync("Score Screen", LoadSceneMode.Single);
+        SceneManager.LoadScene(2, LoadSceneMode.Single);
     }
     public void LaunchCredit()
     {
-        SceneManager.LoadSceneAsync("Credit", LoadSceneMode.Single);
+        SceneManager.LoadScene(3, LoadSceneMode.Single);
         
     } 
     public void ReturnToTitle()
     {
-        SceneManager.LoadSceneAsync("Title Screen", LoadSceneMode.Single);
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
        
+    }
+    public void HowToPlay()
+    {
+        SceneManager.LoadScene(4, LoadSceneMode.Single);
     }
 
    public void ExitGame()

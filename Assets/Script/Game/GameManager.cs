@@ -9,16 +9,12 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     
     public void ResetLevel()
     {
-        Scene scene = SceneManager.GetActiveScene();
-      
-        SceneManager.LoadSceneAsync(scene.name);
-        
-       
+        SceneManager.LoadScene(1, LoadSceneMode.Single); 
     }
     public void ReturnToTitle()
     {
        
-         SceneManager.LoadSceneAsync("Title Screen",LoadSceneMode.Single);
+         SceneManager.LoadSceneAsync(0,LoadSceneMode.Single);
          
     }
 }

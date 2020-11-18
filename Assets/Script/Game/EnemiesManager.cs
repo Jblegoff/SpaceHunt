@@ -114,7 +114,7 @@ public class EnemiesManager : MonoBehaviour
         {
             state = SpawnState.SPAWNING;
             Debug.Log("All wave complete");
-
+            StartCoroutine(Waiter());
             Boss.gameObject.SetActive(true);
 
         }
@@ -134,5 +134,9 @@ public class EnemiesManager : MonoBehaviour
     public void OnDestroy()
     {
         Destroy(gameObject);
+    }
+    IEnumerator Waiter()
+    {
+        yield return new WaitForSeconds(5f);
     }
 }

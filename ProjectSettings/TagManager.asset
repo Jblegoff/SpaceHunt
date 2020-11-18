@@ -9,6 +9,7 @@ TagManager:
   - Boss
   - UI
   - Healthpack
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX

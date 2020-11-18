@@ -25,9 +25,10 @@ public class UserInterface : MonoBehaviourSingleton<UserInterface>
     private void Awake()
     {
         base.Awake();
-        player.OnHPChange += HandlingHPChange;
+        player.OnHPLoss += HandlingHPLoss;
+        player.OnHPRestored += HandlingHPRestored;
         player.OnScoreChange += HandlingScoreChange;
-        player.OnHPChange += HandlingGameOver;
+        player.OnHPLoss += HandlingGameOver;
         if (boss.enabled)
         {
             boss.OnHPChange += HandlingVictory;
@@ -36,7 +37,12 @@ public class UserInterface : MonoBehaviourSingleton<UserInterface>
      
     }
 
-   
+    private void HandlingHPRestored(int hp)
+    {
+        hp_bar.value = player.GetHP() + hp;
+    }
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -85,7 +91,7 @@ public class UserInterface : MonoBehaviourSingleton<UserInterface>
             hp_boss.value = boss.GetHP() - hp;
         }
     }
-    private void HandlingHPChange(int hp)
+    private void HandlingHPLoss(int hp)
     {
         hp_bar.value = player.GetHP()-hp;
         //Debug.Log("Current bar value: " + hp_bar.value + ", Player's HP: " + player.GetHP()+ ", MAX HP: "+player.GetMaxHP()) ;
