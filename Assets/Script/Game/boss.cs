@@ -42,8 +42,8 @@ public class Boss : Entity
 
     void Movement()
     {
-        
-        //Vector3 screenpos = Camera.main.WorldToScreenPoint(transform.position);
+        //random movement of the boss thanks to a target
+
         UnityEngine.Debug.Log("target: " + target);
         
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
@@ -59,6 +59,7 @@ public class Boss : Entity
             transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
         }
 
+        //Generation of the boss's bullets
         stopwatch.Stop();
         TimeSpan ts = stopwatch.Elapsed;
         if (ts.TotalSeconds > shootFrenquency)

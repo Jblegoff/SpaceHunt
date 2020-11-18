@@ -147,7 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   max_HP: 2
   speed: 6
-  enemyBullet: {fileID: 5466614089522759692, guid: 751c10828bad8b946bcaba8ac6aae81e,
+  enemyBullet: {fileID: 8335257745417251003, guid: 2179081a8ec4d664c9264176ff3d6b71,
     type: 3}
   Bonus: {fileID: 6251039614718529821, guid: 82e2d89bb0d32f545a11f85f97f92eb9, type: 3}
   timeBtwShot: 0

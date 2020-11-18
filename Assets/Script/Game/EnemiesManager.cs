@@ -128,7 +128,7 @@ public class EnemiesManager : MonoBehaviour
     void SpawnEnemy(GameObject _enemy)
     {
         Debug.Log("Spawning enemy: " + _enemy.name);
-        Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        Transform _sp = spawnPoints[Random.Range(2, spawnPoints.Length)];
         Instantiate(_enemy, new Vector3(_sp.position.x, _sp.position.y, 0), _sp.rotation);
     }
 }
